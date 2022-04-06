@@ -5,6 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Auth from "../../../hoc/auth";
 import "./LoginPage.css";
 
+import { Menu } from "antd";
+import {
+  MailOutlined,
+  AppstoreOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
+
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,12 +39,23 @@ function LoginPage() {
     dispatch(loginInfo(data)) // user_action으로 전달
       .then((response) => {
         if (response.payload.loginSuccess) {
-          alert("welcome");
+          // alert("welcome");
           navigate("/");
         } else {
           alert("로그인 실패");
         }
       });
+  };
+
+  const mainPage = () => {
+    navigate("/");
+  };
+  const logInPage = () => {
+    navigate("/LoginPage");
+  };
+
+  const logOutPage = () => {
+    navigate("/registerpage");
   };
 
   return (
@@ -49,7 +67,6 @@ function LoginPage() {
             type="email"
             value={email}
             onChange={emailSave}
-            autoComplete="on"
             placeholder="이메일 입력"
           />
           <label>Password</label>
@@ -57,7 +74,6 @@ function LoginPage() {
             type="password"
             value={password}
             onChange={passwordSave}
-            autoComplete="on"
             placeholder="비밀번호 입력"
           />
 

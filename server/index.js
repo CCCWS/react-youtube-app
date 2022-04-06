@@ -33,7 +33,11 @@ app.get("/api/test", (req, res) => {
   res.send("hello");
 });
 
-////////////////////////////////////////////////
+app.use("/api/video", require("./videoUpload"));
+app.use("/uploads", express.static("uploads"));
+////////////////
+
+////////////////////////////////
 app.post("/api/user/register", (req, res) => {
   //회원 가입시 필요한 정보를 client에서 가져오면
   //그것들을 DB에 넣어줌

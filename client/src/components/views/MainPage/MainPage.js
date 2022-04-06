@@ -1,42 +1,78 @@
+import React, { useEffect, useState } from "react";
+import { Card, Avatar, Col, Typography, Row } from "antd";
+import { useParams } from "react-router-dom";
+// import { FaCode } from "react-icons/fa";
+import moment from "moment";
 import axios from "axios";
-import React, { useEffect } from "react";
 import "./MainPage.css";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Auth from "../../../hoc/auth";
+
+const { Title } = Typography;
+const { Meta } = Card;
 
 function MainPage() {
-  const navigate = useNavigate();
+  // const test = useParams().Main;
+  // console.log(test);
 
-  // useEffect(() => {
-  //   axios.get("/api/test").then((res) => alert(res.data));
-  // }, []);
-  const logOut = () => {
-    axios.get("/api/user/logout").then((response) => {
+  const [Videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/video/getVideo").then((response) => {
       if (response.data.success) {
-        navigate("/LoginPage");
+        console.log(response.data.video);
+        setVideos(response.data.video);
       } else {
-        alert("fail");
+        alert("실패");
       }
     });
-  };
+  }, []);
 
-  const state = useSelector((auth_user) => auth_user.user.userData);
-  // const test = state.userData.isAuth;
+  const renderImage = Videos.map((video, index) => {
+    let minutes = Math.floor(video.duration / 60);
+    let seconds = Math.floor(video.duration - minutes * 60);
 
-  // useEffect(() => {
-  // }, [state]);
-  setTimeout(() => console.log(state.isAuth), 1000);
+    return (
+      <Col key={index} lg={6} md={8} xs={24}>
+        <div style={{ position: "relative" }}>
+          <a href={`/DetailPage/${video._id}`}>
+            <img
+              className="thumbnail"
+              alt="thumbnail"
+              src={`http://localhost:3001/${video.thumbnail}`}
+            />
+
+            <div className=" duration">
+              <span>
+                {minutes} : {seconds}
+              </span>
+            </div>
+          </a>
+        </div>
+        <br />
+        <Meta
+          avatar={<Avatar src={video.writer.image} />}
+          title={video.title}
+        />
+        <span>{video.writer.name} </span>
+        <br />
+        <div>
+          <span style={{ marginLeft: "3rem" }}>
+            {moment(video.createdAt).format("YYYY.MM.DD")}{" "}
+          </span>
+          <span> {video.views}회</span>
+        </div>
+      </Col>
+    );
+  });
 
   return (
-    <>
+    <div className="back">
       <div className="main">
-        <h1>main page</h1>
-        <button className="" onClick={logOut}>
-          logout
-        </button>
+        <h1> Recommended </h1>
+        <hr />
+
+        <Row gutter={16}>{renderImage}</Row>
       </div>
-    </>
+    </div>
   );
 }
 

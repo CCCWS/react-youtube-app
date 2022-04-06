@@ -1,0 +1,24 @@
+.uploadPage {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.Title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.uploadVideo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropZone {
+  width: 300px;
+  height: 240px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}

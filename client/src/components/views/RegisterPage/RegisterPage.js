@@ -1,9 +1,8 @@
-import { Axios } from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerInfo } from "../../../_action/user_action";
 import { useNavigate } from "react-router-dom";
-import Auth from "../../../hoc/auth";
+
 import "./Register.css";
 
 function RegisterPage() {
@@ -55,6 +54,17 @@ function RegisterPage() {
     });
   };
 
+  const mainPage = () => {
+    navigate("/");
+  };
+  const logInPage = () => {
+    navigate("/LoginPage");
+  };
+
+  const registerPage = () => {
+    navigate("/registerpage");
+  };
+
   return (
     <>
       <div className="register">
@@ -64,7 +74,6 @@ function RegisterPage() {
             type="email"
             value={email}
             onChange={emailSave}
-            autoComplete="on"
             placeholder="이메일"
           ></input>
           <label>name</label>
@@ -72,7 +81,6 @@ function RegisterPage() {
             type="text"
             value={name}
             onChange={nameSave}
-            autoComplete="on"
             placeholder="이름"
           ></input>
           <label>password</label>
@@ -80,7 +88,6 @@ function RegisterPage() {
             type="password"
             value={password}
             onChange={passwordSave}
-            autoComplete="on"
             placeholder="비밀번호"
           ></input>
           <label>confirm password </label>
@@ -88,7 +95,6 @@ function RegisterPage() {
             type="password"
             value={confirmPass}
             onChange={confirmPassSave}
-            autoComplete="on"
             placeholder="비밀번호 확인"
           ></input>
           <br />

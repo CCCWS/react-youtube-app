@@ -1,0 +1,28 @@
+.sideBox {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.sideItem {
+  width: 40%;
+  margin-bottom: 10px;
+}
+
+.thambnail {
+  width: 100%;
+  padding-right: 10px;
+}
+
+.videoInfo {
+  width: 50%;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+}
