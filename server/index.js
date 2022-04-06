@@ -34,6 +34,7 @@ app.get("/api/test", (req, res) => {
 });
 
 app.use("/api/video", require("./videoUpload"));
+app.use("/api/subscribe", require("./Subscribe"));
 app.use("/uploads", express.static("uploads"));
 ////////////////
 

@@ -4,6 +4,7 @@ import { Row, Col, List, Avatar } from "antd";
 import axios from "axios";
 import "./DetailPage";
 import SideVideo from "./SideVideo";
+import Subscribe from "./Subscribe";
 
 function DetailPage() {
   const videoId = useParams().videoId;
@@ -33,7 +34,9 @@ function DetailPage() {
                 controls
               ></video>
 
-              <List.Item actions>
+              <List.Item
+                actions={[<Subscribe userData={videoDeatil.writer} />]}
+              >
                 <List.Item.Meta
                   avatar={<Avatar src={videoDeatil.writer.image} />}
                   title={`${videoDeatil.title} - ${videoDeatil.writer.name}`}

@@ -1,0 +1,19 @@
+.subscribe {
+  background-color: Red;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 10px;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.subscribed {
+  background-color: rgb(146, 146, 146);
+  border-radius: 10px;
+  color: white;
+  padding: 10px 10px;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+}

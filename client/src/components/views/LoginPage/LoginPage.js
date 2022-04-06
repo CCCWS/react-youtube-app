@@ -2,15 +2,7 @@ import { useDispatch } from "react-redux";
 import { loginInfo } from "../../../_action/user_action";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Auth from "../../../hoc/auth";
 import "./LoginPage.css";
-
-import { Menu } from "antd";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -40,6 +32,7 @@ function LoginPage() {
       .then((response) => {
         if (response.payload.loginSuccess) {
           // alert("welcome");
+          window.localStorage.setItem("userId", response.payload.userId);
           navigate("/");
         } else {
           alert("로그인 실패");
