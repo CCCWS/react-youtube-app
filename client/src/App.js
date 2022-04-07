@@ -8,6 +8,7 @@ import UploadPage from "./components/views/UploadPage/UploadPage";
 import Header from "./components/views/header/Header";
 import DetailPage from "./components/views/VideoDetailPage/DetailPage";
 import GlobalStyle from "./GlobalStyle.js";
+import SubscribePage from "./components/views/SubscribePage/SubscribePage";
 
 function App() {
   const AuthMainPage = Auth(MainPage, null);
@@ -38,6 +39,10 @@ function App() {
         <Route
           path={`${process.env.PUBLIC_URL}/DetailPage/:videoId`}
           element={Auth(DetailPage, null)}
+        />
+        <Route
+          path={`${process.env.PUBLIC_URL}/SubscribePage`}
+          element={Auth(SubscribePage, true)}
         />
       </Routes>
     </BrowserRouter>

@@ -1,0 +1,17 @@
+.commentInput {
+  display: flex;
+}
+
+.commentInputBox {
+  width: 80%;
+  border-radius: 10px;
+  resize: none;
+  background-color: white;
+}
+
+.commentButton {
+  width: 15%;
+  height: 50px;
+  border-radius: 10px;
+  margin-left: 10px;
+}

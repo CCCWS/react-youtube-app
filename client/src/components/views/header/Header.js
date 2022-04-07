@@ -58,6 +58,11 @@ function Header() {
     navigate("/UploadPage");
   };
 
+  const subscribePage = (e) => {
+    setLocation(e.key);
+    navigate("/SubscribePage");
+  };
+
   const hstyle = {
     backgroundColor: "rgb(240, 176, 176)",
     color: "black",
@@ -79,6 +84,14 @@ function Header() {
               icon={<HomeOutlined />}
             >
               홈
+            </Menu.Item>
+
+            <Menu.Item
+              onClick={subscribePage}
+              key="subscribePage"
+              icon={<VideoCameraAddOutlined />}
+            >
+              구독
             </Menu.Item>
 
             <Menu.Item

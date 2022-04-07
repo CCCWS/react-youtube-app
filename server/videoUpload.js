@@ -4,6 +4,7 @@ const multer = require("multer");
 const ffmpeg = require("fluent-ffmpeg");
 
 const { Video } = require("./models/Video");
+const { Subscriber } = require("./models/Subscriber");
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -65,6 +66,29 @@ app.post("/getVideoDetail", (req, res) => {
       if (err) return res.status(400).status(err);
       res.status(200).json({ success: true, videoDetail });
     });
+});
+
+app.post("/getSubscribeVideo", (req, res) => {
+  //로그인된 아이디로 구독한 유저 탐색
+  Subscriber.find({ userFrom: req.body.userFrom }).exec(
+    (err, subscriberInfo) => {
+      //info에 db에 저장되있는 userFrom의 구독 정보가 들어감
+      if (err) return res.status(400).send(err);
+
+      let subscriberUser = [];
+      subscriberInfo.map((data, index) => {
+        subscriberUser.push(data.userTo); //userFrom이 구독한 여러 userTo를 배열로 집어넣음
+      });
+
+      //subscriberUser에 있는 유저의 비디오를 전송
+      Video.find({ writer: { $in: subscriberUser } }) //$in > mongoDB함수, subscriberUser에 있는 모든 유저를 찾음
+        .populate("writer") // writer의 모든 정보를 받음
+        .exec((err, video) => {
+          if (err) return res.status(400).send(err);
+          res.status(200).json({ success: true, video });
+        });
+    }
+  );
 });
 
 app.post("/thumbnail", (req, res) => {

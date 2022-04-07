@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Card, Avatar, Col, Typography, Row } from "antd";
-import { useParams } from "react-router-dom";
-// import { FaCode } from "react-icons/fa";
 import moment from "moment";
 import axios from "axios";
-import "./MainPage.css";
+import "./SubscribePage.css";
 
-const { Title } = Typography;
-const { Meta } = Card;
-
-function MainPage() {
+function SubscribePage() {
   // const test = useParams().Main;
   // console.log(test);
 
+  const { Meta } = Card;
+
   const [Videos, setVideos] = useState([]);
 
+  let subData = { userFrom: localStorage.getItem("userId") }; // 로그인된 유저의 정보를 전송
+
   useEffect(() => {
-    axios.get("/api/video/getVideo").then((response) => {
+    axios.post("/api/video/getSubscribeVideo", subData)
+    .then((response) => {
       if (response.data.success) {
-        console.log(response.data.video);
+        console.log(response.data);
         setVideos(response.data.video);
       } else {
         alert("실패");
@@ -67,7 +67,7 @@ function MainPage() {
   return (
     <div className="back">
       <div className="main">
-        <h1> 추천 영상 </h1>
+        <h1> 구독 영상 </h1>
         <hr />
 
         <Row gutter={16}>{renderImage}</Row>
@@ -76,4 +76,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default SubscribePage;

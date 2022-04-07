@@ -19,8 +19,28 @@ app.post("/subscribed", (req, res) => {
         //length가 1이면 구독중 > true
         result = true;
       }
-      res.status(200).json({ success: true, subscribed: result });
+      res.status(200).json({ success: true, subcribed: result });
     });
+});
+
+app.post("/unSubscribe", (req, res) => {
+  Subscriber.findOneAndDelete({
+    userTo: req.body.userTo,
+    userFrom: req.body.userFrom,
+  }).exec((err, data) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, data });
+  });
+});
+
+app.post("/subscribe", (req, res) => {
+  const subscribe = new Subscriber(req.body);
+
+  subscribe.save((err, data) => {
+    //불러온 모든 정보, userTo, userFrom 저장
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true });
+  });
 });
 
 module.exports = app;
