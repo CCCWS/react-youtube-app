@@ -1,0 +1,13 @@
+.like {
+  cursor: auto;
+}
+
+.dislike {
+  padding-left: 10px;
+  cursor: auto;
+}
+
+.likeText {
+  margin-left: 5px;
+  margin-right: 5px;
+}

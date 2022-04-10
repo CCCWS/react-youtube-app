@@ -23,7 +23,7 @@ const commentSchema = mongoose.Schema(
       type: String,
     },
   },
-  { timestamp: true } //생성일 표시
+  { timestamps: true } //생성일 표시
 );
 const Comment = mongoose.model("Comment", commentSchema);
 

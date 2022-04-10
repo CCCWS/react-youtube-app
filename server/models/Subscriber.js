@@ -14,7 +14,7 @@ const subscriberSchema = mongoose.Schema(
       ref: "User",
     },
   },
-  { timestamp: true } //생성일 표시
+  { timestamps: true } //생성일 표시
 );
 const Subscriber = mongoose.model("Subscriber", subscriberSchema);
 

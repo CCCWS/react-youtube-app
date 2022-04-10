@@ -33,7 +33,7 @@ const videoSchema = mongoose.Schema(
       type: String,
     },
   },
-  { timestamp: true } //생성일 표시
+  { timestamps: true } //생성일 표시
 );
 const Video = mongoose.model("Video", videoSchema);
 

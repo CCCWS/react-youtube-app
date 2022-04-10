@@ -3,37 +3,40 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10; //salt의 자릿수, 이용하여 암호화
 const jwt = require("jsonwebtoken");
 
-const userSchema = mongoose.Schema({
-  name: {
-    type: String,
-    maxlength: 50,
+const userSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      maxlength: 50,
+    },
+    lastname: {
+      type: String,
+      maxlength: 50,
+    },
+    email: {
+      type: String,
+      trim: true, // 스페이스 제거
+      unique: 1,
+    },
+    password: {
+      type: String,
+    },
+    role: {
+      type: Number,
+      default: 0,
+    },
+    image: String,
+    token: {
+      // 유효성 관리
+      type: String,
+    },
+    cokenExp: {
+      //유효기간
+      type: Number,
+    },
   },
-  lastname: {
-    type: String,
-    maxlength: 50,
-  },
-  email: {
-    type: String,
-    trim: true, // 스페이스 제거
-    unique: 1,
-  },
-  password: {
-    type: String,
-  },
-  role: {
-    type: Number,
-    default: 0,
-  },
-  image: String,
-  token: {
-    // 유효성 관리
-    type: String,
-  },
-  cokenExp: {
-    //유효기간
-    type: Number,
-  },
-});
+  { timestamps: true }
+);
 
 userSchema.pre("save", function (next) {
   //몽구스 함수, index.js에서 save전에 함수실행

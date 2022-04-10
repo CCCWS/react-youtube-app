@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Menu } from "antd";
 import {
+  CheckOutlined,
   HomeOutlined,
   LoginOutlined,
   LogoutOutlined,
@@ -25,6 +26,7 @@ function Header() {
         navigate("/");
         setUserAuth(false);
         setUserName("");
+        localStorage.removeItem("userId");
         // alert("로그아웃");
       } else {
         alert("fail");
@@ -89,7 +91,7 @@ function Header() {
             <Menu.Item
               onClick={subscribePage}
               key="subscribePage"
-              icon={<VideoCameraAddOutlined />}
+              icon={<CheckOutlined />}
             >
               구독
             </Menu.Item>

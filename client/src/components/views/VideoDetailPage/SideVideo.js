@@ -9,7 +9,7 @@ function SideVideo() {
   useEffect(() => {
     axios.get("/api/video/getVideo").then((response) => {
       if (response.data.success) {
-        console.log(response.data.video);
+        // console.log(response.data.video);
         setSideVideo(response.data.video);
       } else {
         alert("실패");

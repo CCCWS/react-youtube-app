@@ -15,7 +15,7 @@ function Subscribe(props) {
   useEffect(() => {
     axios.post("/api/subscribe/susbscribeNumber", subData).then((response) => {
       if (response.data.success) {
-        console.log(response);
+        // console.log(response);
         setNumber(response.data.susbscribeNumber);
       } else {
         alert("실패");
@@ -25,7 +25,7 @@ function Subscribe(props) {
     //구독 여부 확인
     axios.post("/api/subscribe/subscribed", subData).then((response) => {
       if (response.data.success) {
-        console.log(response);
+        // console.log(response);
         setSubscribe(response.data.subcribed);
       } else {
         alert("실패");

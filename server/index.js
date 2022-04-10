@@ -36,7 +36,10 @@ app.get("/api/test", (req, res) => {
 app.use("/api/video", require("./videoUpload"));
 app.use("/api/subscribe", require("./Subscribe"));
 app.use("/api/comment", require("./Comment"));
+app.use("/api/like", require("./like"));
+
 app.use("/uploads", express.static("uploads"));
+
 ////////////////
 
 ////////////////////////////////
