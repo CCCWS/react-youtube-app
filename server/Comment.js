@@ -27,5 +27,18 @@ app.post("/getComment", (req, res) => {
     });
 });
 
+app.post("/delComment", (req, res) => {
+  let data = {
+    writer: req.body.writer,
+    videoId: req.body.videoId,
+    // comment: req.body.comment,
+    // responseTo: req.body.responseTo,
+  };
+  Comment.findOneAndDelete(data).exec((err, result) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, result });
+  })
+  if(req.body.responseTo == )
+});
 
 module.exports = app;

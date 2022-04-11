@@ -36,7 +36,7 @@ function DetailPage() {
       });
   }, []);
 
-  console.log("commentList : ", commentList);
+  // console.log("commentList : ", commentList);
   const updateComment = (data) => {
     setCommentList(commentList.concat(data));
   };
@@ -44,7 +44,7 @@ function DetailPage() {
   const test = () => {
     const list = [...commentList];
     list.reverse();
-    console.log("list", list);
+    // console.log("list", list);
     setCommentList(list);
   };
 

@@ -25,7 +25,6 @@ function CommentLists(props) {
 
   const onSubmitIn = (event) => {
     event.preventDefault();
-
     let commnetData = {
       comment: inComment,
       writer: user.userData._id, //리덕스에서 가져오는 방법
@@ -33,19 +32,24 @@ function CommentLists(props) {
       videoId: videoId,
       responseTo: props.comment._id, //댓글이 어느 댓글의 추가 댓글인지
     };
-    if (localStorage.getItem("userId")) {
-      axios.post("/api/comment/saveComment", commnetData).then((response) => {
-        if (response.data.success) {
-          console.log(response);
-          props.updateComment(response.data.result);
-        } else {
-          alert("실패");
-        }
-      });
-      setInCommnet("");
-      setOpenComment(false);
-    } else {
+
+    if (!localStorage.getItem("userId")) {
       alert("로그인이 필요합니다");
+    } else {
+      if (inComment == "") {
+        alert("내용을 입력해주세요");
+      } else {
+        axios.post("/api/comment/saveComment", commnetData).then((response) => {
+          if (response.data.success) {
+            console.log(response);
+            props.updateComment(response.data.result);
+          } else {
+            alert("실패");
+          }
+        });
+        setInCommnet("");
+        setOpenComment(false);
+      }
     }
   };
   const action = [
@@ -62,15 +66,39 @@ function CommentLists(props) {
     </span>,
   ];
 
+  const onDelete = () => {
+    let commnetData = {
+      comment: inComment,
+      writer: user.userData._id,
+      videoId: videoId,
+      // responseTo: props.comment._id,
+    };
+    if (window.confirm("댓글 삭제?")) {
+      axios.post("/api/comment/delComment ", commnetData).then((response) => {
+        if (response.data.success) {
+          console.log(response.data);
+        } else {
+          alert("실패");
+        }
+      });
+      alert("삭제됨");
+    }
+  };
+
   return (
     <div>
-      <Comment
-        actions={action}
-        author={props.comment.writer.name}
-        avatar={<Avatar sre={props.comment.writer.image} alt={"avatar"} />}
-        content={<p>{props.comment.comment}</p>}
-      />
+      <div className="comment">
+        <Comment
+          actions={action}
+          author={props.comment.writer.name}
+          avatar={<Avatar sre={props.comment.writer.image} alt={"avatar"} />}
+          content={<p>{props.comment.comment}</p>}
+        />
 
+        {props.comment.writer._id == localStorage.getItem("userId") ? (
+          <button onClick={onDelete}>X</button>
+        ) : null}
+      </div>
       {openComment && (
         <form className="commentInInput" onSubmit={onSubmitIn}>
           <TextArea

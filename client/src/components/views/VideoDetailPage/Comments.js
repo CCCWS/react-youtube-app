@@ -20,23 +20,28 @@ function Comments(props) {
 
   const onSubmit = (event) => {
     event.preventDefault(); //덧글 작성자 내용 등을 DB에 전송
-    if (localStorage.getItem("userId")) {
-      let commnetData = {
-        comment: comment,
-        writer: user.userData._id, //리덕스에서 가져오는 방법
-        //writer: localStorage.getItem('userId') //로컬스토리지에서 가져오는 방법
-        videoId: videoId,
-      };
-      axios.post("/api/comment/saveComment", commnetData).then((response) => {
-        if (response.data.success) {
-          props.updateComment(response.data.result); //props로 받은 함수에 결과값을 넘겨줌
-        } else {
-          alert("실패");
-        }
-      });
-      setCommnet("");
-    } else {
+
+    let commnetData = {
+      comment: comment,
+      writer: user.userData._id, //리덕스에서 가져오는 방법
+      //writer: localStorage.getItem('userId') //로컬스토리지에서 가져오는 방법
+      videoId: videoId,
+    };
+
+    if (!localStorage.getItem("userId")) {
       alert("로그인이 필요합니다");
+    } else {
+      if (comment == "") {
+        alert("내용을 입력해주세요");
+      } else
+        axios.post("/api/comment/saveComment", commnetData).then((response) => {
+          if (response.data.success) {
+            props.updateComment(response.data.result); //props로 받은 함수에 결과값을 넘겨줌
+          } else {
+            alert("실패");
+          }
+        });
+      setCommnet("");
     }
   };
   const commentLength = props.commentList.length;

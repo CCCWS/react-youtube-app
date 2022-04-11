@@ -28,7 +28,7 @@ function LikeDisLike(props) {
     axios.post("/api/like/getLike", data).then((response) => {
       if (response.data.success) {
         //좋아요 갯수
-        console.log("좋아요수", response.data);
+        // console.log("좋아요수", response.data);
         setLike(response.data.like.length);
         //이미 좋아요를 눌렀는지 확인
         response.data.like.map((like) => {
@@ -47,7 +47,7 @@ function LikeDisLike(props) {
     axios.post("/api/like/getDisLike", data).then((response) => {
       if (response.data.success) {
         //싫어요 갯수
-        console.log("싫어요수", response.data);
+        // console.log("싫어요수", response.data);
         setDisLike(response.data.dislike.length);
         //이미 싫어요를 눌렀는지 확인
         response.data.dislike.map((dislike) => {
@@ -84,6 +84,7 @@ function LikeDisLike(props) {
       //좋아요가 이미 클릭되어 있을때 > 클릭시 하락
       axios.post("/api/like/unLike", data).then((response) => {
         if (response.data.success) {
+          console.log(response);
           setLike(like - 1);
           setLikeAction(!likeAction);
         } else {

@@ -68,7 +68,7 @@ app.post("/unLike", (req, res) => {
 
   Like.findOneAndDelete(data).exec((err, result) => {
     if (err) return res.status(400).json({ success: false, err });
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, result });
   });
 });
 
